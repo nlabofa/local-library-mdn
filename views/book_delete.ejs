@@ -1,0 +1,67 @@
+<%include partials/header%>
+  <div class="col-sm-10">
+    <h1><%=title%>: <%=book.title%></h1>
+    <p class="strong">Author:
+      <a href="<%=book.author.url%>">
+        <%=book.author.name%>
+      </a>
+    </p>
+    <p class="strong">Summary:
+      <%=book.summary%>
+    </p>
+    <p class="strong">ISBN:
+      <%=book.isbn%>
+    </p>
+    <p class="strong">Genres:
+      <%book.genre.forEach(function(val){%>
+        <li>
+          <a href="<%=val.url%>">
+            <%=val.name%>
+          </a>
+        </li>
+        <%})%>
+    </p>
+    <%if(book_instances.length){%>
+      <p class="strong">Delete the following copies before attempting to delete this Book.</p>
+      <div class="" style='margin-left:20px;margin-top:20px'>
+        <h4>Copies</h4>
+        <%book_instances.forEach(function(book_copy){%>
+          <hr>
+          <% if (book_copy.status == 'Available') { %>
+            <p class="text-success">
+              <%=book_copy.status%>
+            </p>
+            <% } else if (book_copy.status == 'Maintenance') { %>
+              <p class="text-danger">
+                <%=book_copy.status%>
+              </p>
+              <% } else { %>
+                <p class="text-warning">
+                  <%=book_copy.status%>
+                </p>
+                <% } %>
+                  <p><strong>Imprint:</strong>
+                    <%=book_copy.imprint%>
+                  </p>
+                  <%if(book_copy.status != 'Available'){%>
+                    <p><strong>Due Back:</strong>
+                      <%=book_copy.due_back_formatted%>
+                    </p>
+                    <p><strong>Id:&nbsp;</strong>
+                      <a href="<%=book_copy.url%>">
+                        <%=book_copy._id%>
+                      </a>
+                    </p>
+                    <%}%>
+                      <%})%>
+                        <%} else{%>
+                          <p>Do you really want to delete this Book?</p>
+                          <form class="" action="" method="post">
+                            <div class="form-group">
+                              <input type="hidden" class="form-control" name="id" value="<%=book._id%>" required="true">
+                            </div>
+                            <button type="submit" class="btn btn-primary" name="button">Delete</button>
+                          </form>
+                          <%}%>
+      </div>
+      <%include partials/footer%>

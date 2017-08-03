@@ -1,0 +1,14 @@
+<%include partials/header%>
+
+<div class="col-sm-10">
+<h1><%=title%></h1>
+<ul>
+<%if(list_genres !=null){%>
+<%list_genres.forEach(function(genre){%>
+  <li><a href="<%=genre.url%>"><%=genre.name%></a></li>
+<%})%>
+<%} else{%>
+  <li>There are no genres</li>
+<%}%>
+</div>
+<%include partials/footer%>

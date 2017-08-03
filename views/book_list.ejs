@@ -1,0 +1,22 @@
+<%include partials/header%>
+
+    <div class="col-sm-10">
+        <h1>
+            <%=title%>
+        </h1>
+        <ul>
+            <%if(book_list !=null){%>
+                <%console.log(book_list)%>
+                    <%book_list.forEach(function(book){%>
+                        <li>
+                            <a href="<%=book.url%>">
+                                <%=book.title%>
+                            </a> (
+                             <%=book.author.name%>)</li>
+                        <%})%>
+                            <%} else{%>
+                                <li>There are no books</li>
+                                <%}%>
+       </ul>
+    </div>
+<%include partials/footer%>
